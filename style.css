@@ -150,3 +150,28 @@ transform:translate(var(--x),var(--y)) scale(1.6);
 }
 
 }
+.spark{
+position:fixed;
+width:10px;
+height:10px;
+border-radius:50%;
+background:radial-gradient(circle,#fff799,#ffd700,#ff9800);
+box-shadow:0 0 8px #fff799,0 0 18px gold,0 0 28px orange;
+pointer-events:none;
+z-index:9999;
+animation:sparkMove .9s ease-out forwards;
+}
+
+@keyframes sparkMove{
+0%{
+opacity:1;
+transform:translate(0,0) scale(.2);
+}
+30%{
+transform:translate(calc(var(--x)*0.4),calc(var(--y)*0.4)) scale(1.3);
+}
+100%{
+opacity:0;
+transform:translate(var(--x),var(--y)) scale(.1);
+}
+}
