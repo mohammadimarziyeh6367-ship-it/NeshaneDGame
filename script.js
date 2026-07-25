@@ -74,7 +74,7 @@ btn.disabled=true;
 if(item.correct){
 
 btn.classList.add("correct");
-
+createStars();
 score++;
 
 document.getElementById("score").innerHTML=score;
@@ -100,5 +100,34 @@ document.getElementById("message").innerHTML=
 box.appendChild(btn);
 
 });
+
+}
+function createStars(){
+
+for(let i=0;i<15;i++){
+
+let star=document.createElement("div");
+
+star.innerHTML="⭐";
+
+star.style.position="fixed";
+
+star.style.left=Math.random()*window.innerWidth+"px";
+
+star.style.top=Math.random()*window.innerHeight+"px";
+
+star.style.fontSize="35px";
+
+star.style.zIndex="9999";
+
+document.body.appendChild(star);
+
+setTimeout(function(){
+
+star.remove();
+
+},800);
+
+}
 
 }
