@@ -117,3 +117,36 @@ transform:translateY(-140px) scale(1.6);
 }
 
 }
+.star{
+
+position:fixed;
+
+pointer-events:none;
+
+font-size:26px;
+
+z-index:9999;
+
+animation:explode 0.9s ease-out forwards;
+
+}
+
+@keyframes explode{
+
+0%{
+
+opacity:1;
+
+transform:translate(0,0) scale(0.6);
+
+}
+
+100%{
+
+opacity:0;
+
+transform:translate(var(--x),var(--y)) scale(1.6);
+
+}
+
+}
