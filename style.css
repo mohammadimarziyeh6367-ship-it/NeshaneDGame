@@ -86,3 +86,34 @@ margin-top:25px;
 font-weight:bold;
 color:#e91e63;
 }
+.star{
+
+position:absolute;
+
+font-size:28px;
+
+pointer-events:none;
+
+animation:firework 900ms ease-out forwards;
+
+}
+
+@keyframes firework{
+
+0%{
+
+opacity:1;
+
+transform:translateY(0) scale(0.5);
+
+}
+
+100%{
+
+opacity:0;
+
+transform:translateY(-140px) scale(1.6);
+
+}
+
+}
