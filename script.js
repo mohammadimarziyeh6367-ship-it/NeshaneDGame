@@ -74,7 +74,7 @@ btn.disabled=true;
 if(item.correct){
 
 btn.classList.add("correct");
-createStars();
+createStars(btn);
 score++;
 
 document.getElementById("score").innerHTML=score;
