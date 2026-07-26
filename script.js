@@ -1,28 +1,30 @@
 let studentName = "";
 let score = 0;
+let currentQuestion = 0;
 
-const words = [
+const correctWords = [
+"دست",
+"در",
+"دریا",
+"دام",
+"درخت",
+"دود"
+];
 
-{word:"دَر",correct:true},
-{word:"دریا",correct:true},
-{word:"دوست",correct:true},
-{word:"دندان",correct:true},
-{word:"دست",correct:true},
-{word:"دارکوب",correct:true},
-{word:"درخت",correct:true},
-{word:"دیوار",correct:true},
-{word:"دارو",correct:true},
-{word:"دُلمه",correct:true},
-{word:"داغ",correct:true},
-{word:"دل‌درد",correct:true},
-
-{word:"سیب",correct:false},
-{word:"گل",correct:false},
-{word:"باد",correct:false},
-{word:"خورشید",correct:false},
-{word:"گربه",correct:false},
-{word:"ماه",correct:false}
-
+const wrongWords = [
+"باد",
+"بادبادک",
+"بام",
+"بابا",
+"بادام",
+"آب",
+"آبی",
+"آباد",
+"مدرسه",
+"سبد",
+"آمد",
+"سود",
+"بود"
 ];
 
 document.getElementById("startBtn").onclick=function(){
@@ -45,61 +47,119 @@ document.getElementById("showName").innerHTML=
 
 "🌸 "+studentName+" خوش آمدی";
 
-createCards();
+nextQuestion();
+
+}
+function nextQuestion(){
+
+if(currentQuestion>=correctWords.length){
+
+finishGame();
+
+return;
 
 }
 
-function createCards(){
+let correct=correctWords[currentQuestion];
 
-let box=document.getElementById("cards");
+let options=[correct];
 
-box.innerHTML="";
+while(options.length<4){
 
-words.sort(()=>Math.random()-0.5);
+let word=wrongWords[
+Math.floor(Math.random()*wrongWords.length)
+];
 
-words.forEach(item=>{
+if(!options.includes(word)){
 
-let btn=document.createElement("button");
+options.push(word);
 
-btn.className="wordCard";
+}
 
-btn.innerHTML=item.word;
+}
+
+options.sort(()=>Math.random()-0.5);
+
+for(let i=0;i<4;i++){
+
+let btn=document.getElementById("btn"+i);
+
+btn.disabled=false;
+
+btn.className="optionBtn";
+
+btn.innerHTML=options[i];
 
 btn.onclick=function(){
 
-if(btn.disabled)return;
+checkAnswer(btn,options[i],correct);
 
-btn.disabled=true;
+}
 
-if(item.correct){
+}
+
+}
+function checkAnswer(btn,selectedWord,correctWord){
+
+document.querySelectorAll(".optionBtn").forEach(b=>b.disabled=true);
+
+if(selectedWord===correctWord){
 
 btn.classList.add("correct");
+
 createStars(btn);
+
 score++;
 
 document.getElementById("score").innerHTML=score;
 
 document.getElementById("message").innerHTML=
+"🌟 آفرین!";
 
-"🌟 آفرین! این کلمه با «د» شروع می‌شود.";
-
-}
-
-else{
+}else{
 
 btn.classList.add("wrong");
 
 document.getElementById("message").innerHTML=
+"😊 دوباره تلاش کن";
 
-"😊 این کلمه با «د» شروع نمی‌شود.";
+document.querySelectorAll(".optionBtn").forEach(button=>{
+
+if(button.innerHTML===correctWord){
+
+button.classList.add("correct");
 
 }
-
-}
-
-box.appendChild(btn);
 
 });
+
+}
+
+currentQuestion++;
+
+setTimeout(function(){
+
+document.getElementById("message").innerHTML="";
+
+nextQuestion();
+
+},1500);
+
+}
+
+
+
+function finishGame(){
+
+document.getElementById("gamePage").style.display="none";
+
+document.getElementById("finishPage").style.display="block";
+
+document.getElementById("resultName").innerHTML=
+"🌸 آفرین "+studentName;
+
+document.getElementById("finalScore").innerHTML=
+score+" از "+correctWords.length;
 
 }
 function createStars(card){
