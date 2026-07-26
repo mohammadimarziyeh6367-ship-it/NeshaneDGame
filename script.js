@@ -162,6 +162,21 @@ document.getElementById("finalScore").innerHTML=
 score+" از "+correctWords.length;
 
 }
+function restartGame(){
+
+score = 0;
+
+currentQuestion = 0;
+
+document.getElementById("score").innerHTML = 0;
+
+document.getElementById("finishPage").style.display = "none";
+
+document.getElementById("gamePage").style.display = "block";
+
+nextQuestion();
+
+}
 function createStars(card){
 
 const rect=card.getBoundingClientRect();
