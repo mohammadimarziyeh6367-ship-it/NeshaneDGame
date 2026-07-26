@@ -87,14 +87,28 @@ nextQuestion();
 
 }
 function nextQuestion(){
-
 if(currentQuestion>=correctWords.length){
+
+if(stage===1){
+
+stage=2;
+
+currentQuestion=0;
+
+alert("🌸 آفرین! مرحله اول تمام شد.\nحالا مرحله دوم شروع می‌شود.\n\nکلمه‌ای را پیدا کن که صدای آخرش «د» باشد.");
+
+nextQuestion();
+
+return;
+
+}
 
 finishGame();
 
 return;
 
 }
+
 
 let correct=correctWords[currentQuestion];
 
