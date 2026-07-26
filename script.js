@@ -102,31 +102,38 @@ box.appendChild(btn);
 });
 
 }
-function createStars(){
+function createStars(card){
 
-for(let i=0;i<15;i++){
+const rect=card.getBoundingClientRect();
 
-let star=document.createElement("div");
+const cx=rect.left+rect.width/2;
+const cy=rect.top+rect.height/2;
 
-star.innerHTML="⭐";
+for(let i=0;i<28;i++){
 
-star.style.position="fixed";
+const spark=document.createElement("div");
 
-star.style.left=Math.random()*window.innerWidth+"px";
+spark.className="spark";
 
-star.style.top=Math.random()*window.innerHeight+"px";
+spark.style.left=cx+"px";
+spark.style.top=cy+"px";
 
-star.style.fontSize="35px";
+const angle=(Math.PI*2/28)*i;
+const distance=70+Math.random()*30;
 
-star.style.zIndex="9999";
+const x=Math.cos(angle)*distance+"px";
+const y=Math.sin(angle)*distance+"px";
 
-document.body.appendChild(star);
+spark.style.setProperty("--x",x);
+spark.style.setProperty("--y",y);
 
-setTimeout(function(){
+document.body.appendChild(spark);
 
-star.remove();
+setTimeout(()=>{
 
-},800);
+spark.remove();
+
+},900);
 
 }
 
