@@ -1,17 +1,22 @@
 let studentName = "";
 let score = 0;
 let currentQuestion = 0;
+let stage = 1;
+// ===== مرحله اول =====
 
-const correctWords = [
+const correctStart = [
+
 "دست",
 "در",
 "دریا",
 "دام",
 "درخت",
 "دود"
+
 ];
 
-const wrongWords = [
+const wrongStart = [
+
 "باد",
 "بادبادک",
 "بام",
@@ -25,7 +30,38 @@ const wrongWords = [
 "آمد",
 "سود",
 "بود"
+
 ];
+
+
+// ===== مرحله دوم =====
+
+const correctEnd = [
+
+"باد",
+"بود",
+"سود",
+"آمد"
+
+];
+
+const wrongEnd = [
+
+"دست",
+"در",
+"دریا",
+"دام",
+"درخت",
+"دود",
+"بابا",
+"آبی",
+"بادام",
+"مدرسه",
+"سبد"
+
+];
+
+
 
 document.getElementById("startBtn").onclick=function(){
 
