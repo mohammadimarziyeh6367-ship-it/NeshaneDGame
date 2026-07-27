@@ -1,264 +1,272 @@
-let studentName = "";
-let score = 0;
-let currentQuestion = 0;
-let stage = 1;
-// ===== مرحله اول =====
+body{
 
-const correctStart = [
-
-"دست",
-"در",
-"دریا",
-"دام",
-"درخت",
-"دود"
-
-];
-
-const wrongStart = [
-
-"باد",
-"بادبادک",
-"بام",
-"بابا",
-"بادام",
-"آب",
-"آبی",
-"آباد",
-"مدرسه",
-"سبد",
-"آمد",
-"سود",
-"بود"
-
-];
-
-
-// ===== مرحله دوم =====
-
-const correctEnd = [
-
-"باد",
-"بود",
-"سود",
-"آمد"
-
-];
-
-const wrongEnd = [
-
-"دست",
-"در",
-"دریا",
-"دام",
-"درخت",
-"دود",
-"بابا",
-"آبی",
-"بادام",
-"مدرسه",
-"سبد"
-
-];
-
-
-
-document.getElementById("startBtn").onclick=function(){
-
-studentName=document.getElementById("studentName").value.trim();
-
-if(studentName==""){
-
-alert("نام خود را وارد کن 😊");
-
-return;
+margin:0;
+padding:0;
+font-family:"Vazirmatn",sans-serif;
+background:linear-gradient(#9edbff,#eefcff);
+text-align:center;
 
 }
 
-document.getElementById("startPage").style.display="none";
+.container{
 
-document.getElementById("gamePage").style.display="block";
-
-document.getElementById("showName").innerHTML=
-
-"🌸 "+studentName+" خوش آمدی";
-
-nextQuestion();
-
-}
-function nextQuestion(){
-if(currentQuestion>=correctWords.length){
-
-if(stage===1){
-
-stage=2;
-
-currentQuestion=0;
-
-alert("🌸 آفرین! مرحله اول تمام شد.\nحالا مرحله دوم شروع می‌شود.\n\nکلمه‌ای را پیدا کن که صدای آخرش «د» باشد.");
-
-nextQuestion();
-
-return;
+max-width:900px;
+margin:auto;
+padding:20px;
 
 }
 
-finishGame();
+h1{
 
-return;
-
-}
-
-
-let correct=correctWords[currentQuestion];
-
-let options=[correct];
-
-while(options.length<4){
-
-let word=wrongWords[
-Math.floor(Math.random()*wrongWords.length)
-];
-
-if(!options.includes(word)){
-
-options.push(word);
+color:#ff4fa0;
+font-size:42px;
 
 }
 
-}
+h2{
 
-options.sort(()=>Math.random()-0.5);
-
-for(let i=0;i<4;i++){
-
-let btn=document.getElementById("btn"+i);
-
-btn.disabled=false;
-
-btn.className="optionBtn";
-
-btn.innerHTML=options[i];
-
-btn.onclick=function(){
-
-checkAnswer(btn,options[i],correct);
+color:#1976d2;
 
 }
 
-}
+h3{
 
-}
-function checkAnswer(btn,selectedWord,correctWord){
-
-document.querySelectorAll(".optionBtn").forEach(b=>b.disabled=true);
-
-if(selectedWord===correctWord){
-
-btn.classList.add("correct");
-
-createStars(btn);
-
-score++;
-
-document.getElementById("score").innerHTML=score;
-
-document.getElementById("message").innerHTML=
-"🌟 آفرین!";
-
-}else{
-
-btn.classList.add("wrong");
-
-document.getElementById("message").innerHTML=
-"😊 دوباره تلاش کن";
-
-document.querySelectorAll(".optionBtn").forEach(button=>{
-
-if(button.innerHTML===correctWord){
-
-button.classList.add("correct");
+color:#ff9800;
 
 }
 
-});
+.teacher{
+
+width:220px;
+border-radius:25px;
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+margin:20px auto;
+display:block;
 
 }
 
-currentQuestion++;
+.teacherSmall{
 
-setTimeout(function(){
-
-document.getElementById("message").innerHTML="";
-
-nextQuestion();
-
-},1500);
+width:120px;
+border-radius:20px;
+box-shadow:0 6px 18px rgba(0,0,0,.25);
 
 }
 
+.teacherBox{
 
-
-function finishGame(){
-
-document.getElementById("gamePage").style.display="none";
-
-document.getElementById("finishPage").style.display="block";
-
-document.getElementById("resultName").innerHTML=
-"🌸 آفرین "+studentName;
-
-document.getElementById("finalScore").innerHTML=
-score+" از "+correctWords.length;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:20px;
+margin:20px 0;
 
 }
-function restartGame(){
 
-score = 0;
+.speech{
 
-currentQuestion = 0;
-
-document.getElementById("score").innerHTML = 0;
-
-document.getElementById("finishPage").style.display = "none";
-
-document.getElementById("gamePage").style.display = "block";
-
-nextQuestion();
+background:white;
+padding:15px;
+border-radius:20px;
+font-size:22px;
+color:#444;
+box-shadow:0 5px 12px rgba(0,0,0,.15);
 
 }
-function createStars(card){
 
-const rect=card.getBoundingClientRect();
+input{
 
-const cx=rect.left+rect.width/2;
-const cy=rect.top+rect.height/2;
+width:280px;
+padding:15px;
+font-size:22px;
+border-radius:18px;
+border:none;
+text-align:center;
+margin:20px;
 
-for(let i=0;i<28;i++){
+}
 
-const spark=document.createElement("div");
+.genderBox{
 
-spark.className="spark";
+display:flex;
+justify-content:center;
+gap:35px;
+font-size:22px;
+margin:20px;
 
-spark.style.left=cx+"px";
-spark.style.top=cy+"px";
+}
 
-const angle=(Math.PI*2/28)*i;
-const distance=70+Math.random()*30;
+button{
 
-const x=Math.cos(angle)*distance+"px";
-const y=Math.sin(angle)*distance+"px";
+font-family:"Vazirmatn",sans-serif;
+cursor:pointer;
+transition:.25s;
 
-spark.style.setProperty("--x",x);
-spark.style.setProperty("--y",y);
+}
 
-document.body.appendChild(spark);
+#startBtn,
+#stageBtn,
+#restartBtn{
 
-setTimeout(()=>{
+background:#4CAF50;
+color:white;
+font-size:24px;
+padding:15px 35px;
+border:none;
+border-radius:20px;
 
-spark.remove();
+}
 
-},900);
+#startBtn:hover,
+#stageBtn:hover,
+#restartBtn:hover{
+
+transform:scale(1.05);
+
+}
+
+.topBar{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:white;
+padding:15px 25px;
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+margin-bottom:25px;
+
+}
+
+#player{
+
+display:flex;
+align-items:center;
+gap:12px;
+font-size:26px;
+
+}
+
+#avatar{
+
+font-size:38px;
+
+}
+
+#showName{
+
+font-weight:bold;
+color:#e91e63;
+
+}
+
+#options{
+
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+margin-top:30px;
+
+}
+
+.optionBtn{
+
+position:relative;
+
+background:white;
+
+border:none;
+
+border-radius:22px;
+
+padding:25px;
+
+font-size:30px;
+
+font-weight:bold;
+
+color:#333;
+
+min-height:95px;
+
+box-shadow:0 8px 18px rgba(0,0,0,.18);
+
+overflow:hidden;
+
+}
+
+.optionBtn:hover{
+
+transform:translateY(-4px);
+
+}
+
+.correct{
+
+background:#4CAF50 !important;
+
+color:white !important;
+
+}
+
+.wrong{
+
+background:#F44336 !important;
+
+color:white !important;
+
+}
+
+#message{
+
+font-size:28px;
+font-weight:bold;
+margin-top:25px;
+color:#ff4081;
+
+}
+
+footer{
+
+margin-top:40px;
+font-size:18px;
+color:#555;
+
+}
+
+/* فشفشه */
+
+.spark{
+
+position:absolute;
+
+width:10px;
+
+height:10px;
+
+border-radius:50%;
+
+pointer-events:none;
+
+animation:spark .9s linear forwards;
+
+}
+
+@keyframes spark{
+
+0%{
+
+transform:translate(0,0) scale(1);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translate(var(--x),var(--y)) scale(0);
+
+opacity:0;
 
 }
 
