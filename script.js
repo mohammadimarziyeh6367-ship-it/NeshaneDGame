@@ -1,272 +1,382 @@
-body{
+//========================
+// متغیرها
+//========================
 
-margin:0;
-padding:0;
-font-family:"Vazirmatn",sans-serif;
-background:linear-gradient(#9edbff,#eefcff);
-text-align:center;
+let studentName="";
+let score=0;
+let currentQuestion=0;
+let stage=1;
 
-}
+//========================
+// الگوریتم Fisher-Yates
+//========================
 
-.container{
+function shuffle(array){
 
-max-width:900px;
-margin:auto;
-padding:20px;
+for(let i=array.length-1;i>0;i--){
 
-}
+const j=Math.floor(Math.random()*(i+1));
 
-h1{
-
-color:#ff4fa0;
-font-size:42px;
+[array[i],array[j]]=[array[j],array[i]];
 
 }
 
-h2{
-
-color:#1976d2;
+return array;
 
 }
 
-h3{
+//========================
+// سوالات مرحله اول
+//========================
 
-color:#ff9800;
+const stage1=[
 
-}
+{correct:"دست",wrong:["بابا","آبی","باد"]},
 
-.teacher{
+{correct:"در",wrong:["گل","آب","مدرسه"]},
 
-width:220px;
-border-radius:25px;
-box-shadow:0 10px 25px rgba(0,0,0,.25);
-margin:20px auto;
-display:block;
+{correct:"دریا",wrong:["بابا","باد","آباد"]},
 
-}
+{correct:"دام",wrong:["بادام","بابا","سبد"]},
 
-.teacherSmall{
+{correct:"درخت",wrong:["مدرسه","بابا","آبی"]},
 
-width:120px;
-border-radius:20px;
-box-shadow:0 6px 18px rgba(0,0,0,.25);
+{correct:"دارو",wrong:["باد","بابا","آب"]},
 
-}
+{correct:"داغ",wrong:["باد","بابا","گل"]},
 
-.teacherBox{
+{correct:"دیوار",wrong:["مدرسه","سبد","آباد"]},
 
-display:flex;
-justify-content:center;
-align-items:center;
-gap:20px;
-margin:20px 0;
+{correct:"دُلمه",wrong:["بابا","گل","باد"]},
 
-}
+{correct:"دارکوب",wrong:["بادبادک","بابا","مدرسه"]}
 
-.speech{
+];
 
-background:white;
-padding:15px;
-border-radius:20px;
-font-size:22px;
-color:#444;
-box-shadow:0 5px 12px rgba(0,0,0,.15);
+//========================
+// سوالات مرحله دوم
+//========================
 
-}
+const stage2=[
 
-input{
+{correct:"باد",wrong:["دریا","دست","در"]},
 
-width:280px;
-padding:15px;
-font-size:22px;
-border-radius:18px;
-border:none;
-text-align:center;
-margin:20px;
+{correct:"بود",wrong:["دام","دارو","درخت"]},
 
-}
+{correct:"سود",wrong:["بابا","دریا","مدرسه"]},
 
-.genderBox{
+{correct:"آمد",wrong:["دست","دریا","دام"]},
 
-display:flex;
-justify-content:center;
-gap:35px;
-font-size:22px;
-margin:20px;
+{correct:"سبد",wrong:["دارو","دریا","دست"]},
+
+{correct:"دود",wrong:["دست","در","دریا"]}
+
+];
+
+//========================
+// شروع بازی
+//========================
+
+document.getElementById("startBtn").onclick=function(){
+
+studentName=document.getElementById("studentName").value.trim();
+
+if(studentName===""){
+
+alert("🌸 نام خود را وارد کن.");
+
+return;
 
 }
 
-button{
+const gender=document.querySelector('input[name="gender"]:checked').value;
 
-font-family:"Vazirmatn",sans-serif;
-cursor:pointer;
-transition:.25s;
+document.getElementById("avatar").innerHTML=
 
-}
+gender==="girl" ? "👧" : "👦";
 
-#startBtn,
-#stageBtn,
-#restartBtn{
+document.getElementById("showName").innerHTML=
 
-background:#4CAF50;
-color:white;
-font-size:24px;
-padding:15px 35px;
-border:none;
-border-radius:20px;
+studentName;
 
-}
+document.getElementById("startPage").style.display="none";
 
-#startBtn:hover,
-#stageBtn:hover,
-#restartBtn:hover{
+document.getElementById("gamePage").style.display="block";
 
-transform:scale(1.05);
+score=0;
 
-}
+currentQuestion=0;
 
-.topBar{
+stage=1;
 
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:white;
-padding:15px 25px;
-border-radius:20px;
-box-shadow:0 5px 15px rgba(0,0,0,.15);
-margin-bottom:25px;
+document.getElementById("score").innerHTML=0;
 
-}
+// سوالات هر بار جابه‌جا شوند
 
-#player{
+shuffle(stage1);
 
-display:flex;
-align-items:center;
-gap:12px;
-font-size:26px;
+shuffle(stage2);
 
-}
+nextQuestion();
 
-#avatar{
+};
+//========================
+// سوال بعدی
+//========================
 
-font-size:38px;
+function nextQuestion(){
 
-}
+let data;
 
-#showName{
+// انتخاب مرحله
 
-font-weight:bold;
-color:#e91e63;
+if(stage===1){
 
-}
+document.getElementById("stageTitle").innerHTML="🌸 مرحله اول";
 
-#options{
+document.getElementById("question").innerHTML=
 
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:20px;
-margin-top:30px;
+"کدام کلمه با «د» شروع می‌شود؟";
+
+data=stage1;
+
+}else{
+
+document.getElementById("stageTitle").innerHTML="🌸 مرحله دوم";
+
+document.getElementById("question").innerHTML=
+
+"کدام کلمه صدای آخرش «د» است؟";
+
+data=stage2;
 
 }
 
-.optionBtn{
+// پایان مرحله
 
-position:relative;
+if(currentQuestion>=data.length){
 
-background:white;
+if(stage===1){
 
-border:none;
+document.getElementById("gamePage").style.display="none";
 
-border-radius:22px;
+document.getElementById("stagePage").style.display="block";
 
-padding:25px;
+return;
 
-font-size:30px;
+}else{
 
-font-weight:bold;
+finishGame();
 
-color:#333;
-
-min-height:95px;
-
-box-shadow:0 8px 18px rgba(0,0,0,.18);
-
-overflow:hidden;
+return;
 
 }
 
-.optionBtn:hover{
+}
 
-transform:translateY(-4px);
+// سوال جاری
+
+let question=data[currentQuestion];
+
+// ساخت گزینه‌ها
+
+let options=[
+
+question.correct,
+
+...question.wrong
+
+];
+
+// کاملاً تصادفی
+
+shuffle(options);
+
+// قرار دادن روی دکمه‌ها
+
+for(let i=0;i<4;i++){
+
+let btn=document.getElementById("btn"+i);
+
+btn.disabled=false;
+
+btn.className="optionBtn";
+
+btn.innerHTML=options[i];
+
+btn.onclick=function(){
+
+checkAnswer(
+
+btn,
+
+options[i],
+
+question.correct
+
+);
+
+};
 
 }
 
-.correct{
+}
+document.getElementById("stageBtn").onclick=function(){
 
-background:#4CAF50 !important;
+stage=2;
 
-color:white !important;
+currentQuestion=0;
+
+document.getElementById("stagePage").style.display="none";
+
+document.getElementById("gamePage").style.display="block";
+
+nextQuestion();
+
+};
+//========================
+// بررسی جواب
+//========================
+
+function checkAnswer(btn,selected,correct){
+
+document.querySelectorAll(".optionBtn").forEach(b=>{
+
+b.disabled=true;
+
+});
+
+if(selected===correct){
+
+btn.classList.add("correct");
+
+score++;
+
+document.getElementById("score").innerHTML=score;
+
+document.getElementById("message").innerHTML="🌟 آفرین!";
+
+createFireworks(btn);
+
+}else{
+
+btn.classList.add("wrong");
+
+document.getElementById("message").innerHTML="😊 دوباره فکر کن.";
+
+document.querySelectorAll(".optionBtn").forEach(b=>{
+
+if(b.innerHTML===correct){
+
+b.classList.add("correct");
 
 }
 
-.wrong{
-
-background:#F44336 !important;
-
-color:white !important;
+});
 
 }
 
-#message{
+currentQuestion++;
 
-font-size:28px;
-font-weight:bold;
-margin-top:25px;
-color:#ff4081;
+setTimeout(function(){
 
-}
+document.getElementById("message").innerHTML="";
 
-footer{
+nextQuestion();
 
-margin-top:40px;
-font-size:18px;
-color:#555;
+},1500);
 
 }
 
-/* فشفشه */
+//========================
+// پایان بازی
+//========================
 
-.spark{
+function finishGame(){
 
-position:absolute;
+document.getElementById("gamePage").style.display="none";
 
-width:10px;
+document.getElementById("finishPage").style.display="block";
 
-height:10px;
+document.getElementById("resultName").innerHTML=
 
-border-radius:50%;
+"🌸 آفرین "+studentName;
 
-pointer-events:none;
+let total=stage1.length+stage2.length;
 
-animation:spark .9s linear forwards;
+document.getElementById("finalScore").innerHTML=
 
-}
-
-@keyframes spark{
-
-0%{
-
-transform:translate(0,0) scale(1);
-
-opacity:1;
+score+" از "+total;
 
 }
 
-100%{
+//========================
+// بازی دوباره
+//========================
 
-transform:translate(var(--x),var(--y)) scale(0);
+document.getElementById("restartBtn").onclick=function(){
 
-opacity:0;
+location.reload();
+
+};
+
+//========================
+// فشفشه رنگی
+//========================
+
+function createFireworks(button){
+
+const rect=button.getBoundingClientRect();
+
+for(let i=0;i<35;i++){
+
+const spark=document.createElement("div");
+
+spark.className="spark";
+
+spark.style.left=(rect.width/2)+"px";
+
+spark.style.top=(rect.height/2)+"px";
+
+const angle=Math.random()*Math.PI*2;
+
+const distance=40+Math.random()*70;
+
+spark.style.setProperty("--x",
+
+Math.cos(angle)*distance+"px");
+
+spark.style.setProperty("--y",
+
+Math.sin(angle)*distance+"px");
+
+const colors=[
+
+"#FFD700",
+
+"#FF4081",
+
+"#00BCD4",
+
+"#4CAF50",
+
+"#FF9800",
+
+"#9C27B0"
+
+];
+
+spark.style.background=
+
+colors[Math.floor(Math.random()*colors.length)];
+
+button.appendChild(spark);
+
+setTimeout(function(){
+
+spark.remove();
+
+},900);
 
 }
 
