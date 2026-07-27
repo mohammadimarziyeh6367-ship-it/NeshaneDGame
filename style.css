@@ -1,214 +1,203 @@
-
 body{
+
 margin:0;
 padding:0;
 font-family:"Vazirmatn",sans-serif;
-background:linear-gradient(#8fd3ff,#dff8ff);
+background:linear-gradient(#9edbff,#eefcff);
 text-align:center;
+
 }
 
 .container{
+
 max-width:900px;
 margin:auto;
 padding:20px;
+
 }
 
 h1{
-color:#ff4081;
+
+color:#ff4fa0;
 font-size:42px;
+
 }
 
 h2{
+
 color:#1976d2;
+
 }
 
-input{
-width:280px;
-padding:15px;
-font-size:22px;
-border-radius:15px;
-border:none;
-margin:20px;
-text-align:center;
-}
+h3{
 
-button{
-font-family:"Vazirmatn",sans-serif;
-font-size:22px;
-padding:15px 25px;
-border:none;
-border-radius:18px;
-cursor:pointer;
-background:#4CAF50;
-color:white;
-margin:10px;
-}
+color:#ff9800;
 
-button:hover{
-transform:scale(1.05);
 }
 
 .teacher{
+
 width:220px;
-border-radius:20px;
+border-radius:25px;
+box-shadow:0 10px 25px rgba(0,0,0,.25);
 margin:20px auto;
 display:block;
+
 }
 
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-gap:15px;
-margin-top:30px;
-}
+.teacherSmall{
 
-.wordCard{
-background:white;
-color:#333;
-font-size:28px;
-padding:20px;
+width:120px;
 border-radius:20px;
+box-shadow:0 6px 18px rgba(0,0,0,.25);
+
 }
 
-.correct{
-background:#8BC34A !important;
+.teacherBox{
+
+display:flex;
+justify-content:center;
+align-items:center;
+gap:20px;
+margin:20px 0;
+
+}
+
+.speech{
+
+background:white;
+padding:15px;
+border-radius:20px;
+font-size:22px;
+color:#444;
+box-shadow:0 5px 12px rgba(0,0,0,.15);
+
+}
+
+input{
+
+width:280px;
+padding:15px;
+font-size:22px;
+border-radius:18px;
+border:none;
+text-align:center;
+margin:20px;
+
+}
+
+.genderBox{
+
+display:flex;
+justify-content:center;
+gap:35px;
+font-size:22px;
+margin:20px;
+
+}
+
+button{
+
+font-family:"Vazirmatn",sans-serif;
+cursor:pointer;
+transition:.25s;
+
+}
+
+#startBtn,
+#stageBtn,
+#restartBtn{
+
+background:#4CAF50;
 color:white;
-}
-
-.wrong{
-background:#F44336 !important;
-color:white;
-}
-
-#message{
-font-size:28px;
-margin-top:25px;
-font-weight:bold;
-color:#e91e63;
-}
-.star{
-
-position:absolute;
-
-font-size:28px;
-
-pointer-events:none;
-
-animation:firework 900ms ease-out forwards;
+font-size:24px;
+padding:15px 35px;
+border:none;
+border-radius:20px;
 
 }
 
-@keyframes firework{
+#startBtn:hover,
+#stageBtn:hover,
+#restartBtn:hover{
 
-0%{
-
-opacity:1;
-
-transform:translateY(0) scale(0.5);
+transform:scale(1.05);
 
 }
 
-100%{
+.topBar{
 
-opacity:0;
-
-transform:translateY(-140px) scale(1.6);
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:white;
+padding:15px 25px;
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+margin-bottom:25px;
 
 }
 
-}
-.star{
+#player{
 
-position:fixed;
-
-pointer-events:none;
-
+display:flex;
+align-items:center;
+gap:12px;
 font-size:26px;
 
-z-index:9999;
+}
 
-animation:explode 0.9s ease-out forwards;
+#avatar{
+
+font-size:38px;
 
 }
 
-@keyframes explode{
+#showName{
 
-0%{
-
-opacity:1;
-
-transform:translate(0,0) scale(0.6);
+font-weight:bold;
+color:#e91e63;
 
 }
 
-100%{
-
-opacity:0;
-
-transform:translate(var(--x),var(--y)) scale(1.6);
-
-}
-
-}
-.spark{
-position:fixed;
-width:10px;
-height:10px;
-border-radius:50%;
-background:radial-gradient(circle,#fff799,#ffd700,#ff9800);
-box-shadow:0 0 8px #fff799,0 0 18px gold,0 0 28px orange;
-pointer-events:none;
-z-index:9999;
-animation:sparkMove .9s ease-out forwards;
-}
-
-@keyframes sparkMove{
-0%{
-opacity:1;
-transform:translate(0,0) scale(.2);
-}
-30%{
-transform:translate(calc(var(--x)*0.4),calc(var(--y)*0.4)) scale(1.3);
-}
-100%{
-opacity:0;
-transform:translate(var(--x),var(--y)) scale(.1);
-}
-}
 #options{
 
 display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:18px;
-
-margin-top:35px;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+margin-top:30px;
 
 }
+
 .optionBtn{
+
+position:relative;
 
 background:white;
 
-color:#222;
+border:none;
+
+border-radius:22px;
+
+padding:25px;
 
 font-size:30px;
 
 font-weight:bold;
 
-padding:25px;
+color:#333;
 
-border-radius:20px;
+min-height:95px;
 
-min-height:90px;
+box-shadow:0 8px 18px rgba(0,0,0,.18);
 
-cursor:pointer;
+overflow:hidden;
 
 }
 
 .optionBtn:hover{
 
-transform:scale(1.05);
+transform:translateY(-4px);
 
 }
 
@@ -216,7 +205,7 @@ transform:scale(1.05);
 
 background:#4CAF50 !important;
 
-color:white;
+color:white !important;
 
 }
 
@@ -224,6 +213,61 @@ color:white;
 
 background:#F44336 !important;
 
-color:white;
+color:white !important;
+
+}
+
+#message{
+
+font-size:28px;
+font-weight:bold;
+margin-top:25px;
+color:#ff4081;
+
+}
+
+footer{
+
+margin-top:40px;
+font-size:18px;
+color:#555;
+
+}
+
+/* فشفشه */
+
+.spark{
+
+position:absolute;
+
+width:10px;
+
+height:10px;
+
+border-radius:50%;
+
+pointer-events:none;
+
+animation:spark .9s linear forwards;
+
+}
+
+@keyframes spark{
+
+0%{
+
+transform:translate(0,0) scale(1);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translate(var(--x),var(--y)) scale(0);
+
+opacity:0;
+
+}
 
 }
