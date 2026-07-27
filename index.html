@@ -2,9 +2,11 @@
 <html lang="fa" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سرزمین نشانه‌ها | نشانه د</title>
+
+<title>🌈 سرزمین نشانه‌ها | نشانه د</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -16,52 +18,206 @@
 
 <div class="container">
 
-<h1>🌈 سرزمین نشانه‌ها</h1>
-
-<h2>مأموریت اول: کدام کلمه ها با « د»شروع می شوند ؟ </h2>
+<!-- صفحه شروع -->
 
 <div id="startPage">
 
-<input id="studentName" type="text" placeholder="نام خود را وارد کن">
+<h1>🌈 سرزمین نشانه‌ها 🌈</h1>
+
+<h2>آموزش نشانه «د»</h2>
+
+<img
+src="E3A460C6-A090-4050-8A2C-BED2517189E3.png"
+class="teacher"
+alt="معلم">
+
+<h3>
+🌸 نام قشنگت چیست؟
+</h3>
+
+<input
+type="text"
+id="studentName"
+placeholder="نام خود را وارد کن">
+
+<div class="genderBox">
+
+<label>
+
+<input
+type="radio"
+name="gender"
+value="girl"
+checked>
+
+👧 دختر
+
+</label>
+
+<label>
+
+<input
+type="radio"
+name="gender"
+value="boy">
+
+👦 پسر
+
+</label>
+
+</div>
 
 <button id="startBtn">
+
 🚀 شروع بازی
+
 </button>
 
 </div>
 
+<!-- صفحه بازی -->
+
 <div id="gamePage" style="display:none;">
 
-<h2 id="showName"></h2>
+<div class="topBar">
 
-<img src="photo-output.png" class="teacher">
+<div id="player">
+
+<span id="avatar">👧</span>
+
+<span id="showName"></span>
+
+</div>
+
+<div>
+
+⭐ امتیاز :
+
+<span id="score">
+
+0
+
+</span>
+
+</div>
+
+</div>
+
+<div class="teacherBox">
+
+<img
+src="E3A460C6-A090-4050-8A2C-BED2517189E3.png"
+class="teacherSmall">
+
+<div class="speech">
+
+سلام دوست من 🌸
+
+</div>
+
+</div>
+
+<h2 id="stageTitle">
+
+مرحله اول
+
+</h2>
 
 <h2 id="question">
+
 کدام کلمه با «د» شروع می‌شود؟
+
 </h2>
 
 <div id="options">
 
-<button class="optionBtn" id="btn0"></button>
+<button id="btn0" class="optionBtn"></button>
 
-<button class="optionBtn" id="btn1"></button>
+<button id="btn1" class="optionBtn"></button>
 
-<button class="optionBtn" id="btn2"></button>
+<button id="btn2" class="optionBtn"></button>
 
-<button class="optionBtn" id="btn3"></button>
+<button id="btn3" class="optionBtn"></button>
 
 </div>
 
 <div id="message"></div>
 
-<div id="message"></div>
+</div>
+
+<!-- صفحه بین دو مرحله -->
+
+<div id="stagePage" style="display:none;">
+
+<h1>
+
+🎉🌸🎉
+
+</h1>
+
+<h2>
+
+آفرین
+
+</h2>
 
 <p>
-⭐ امتیاز:
-<span id="score">0</span>
+
+مرحله اول را با موفقیت تمام کردی.
+
 </p>
 
+<button id="stageBtn">
+
+➡️ ورود به مرحله دوم
+
+</button>
+
 </div>
+
+<!-- پایان بازی -->
+
+<div id="finishPage" style="display:none;">
+
+<h1>
+
+🏆
+
+</h1>
+
+<h2 id="resultName"></h2>
+
+<h3>
+
+امتیاز نهایی
+
+</h3>
+
+<h1 id="finalScore"></h1>
+
+<button id="restartBtn">
+
+🔄 بازی دوباره
+
+</button>
+
+</div>
+
+<footer>
+
+A-I Based Education Content Creator
+
+<br>
+
+<strong>
+
+آموزگار پایه اوّل
+
+مهندس مرضیه محمدی
+
+</strong>
+
+</footer>
 
 </div>
 
