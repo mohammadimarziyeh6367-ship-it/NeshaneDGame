@@ -89,10 +89,48 @@ margin:20px;
 .genderBox{
 
 display:flex;
+
 justify-content:center;
-gap:35px;
-font-size:22px;
-margin:20px;
+
+align-items:center;
+
+gap:12px;
+
+margin:15px auto;
+
+font-size:20px;
+
+flex-wrap:wrap;
+
+}
+
+.genderBox label{
+
+display:flex;
+
+align-items:center;
+
+gap:6px;
+
+background:white;
+
+padding:8px 14px;
+
+border-radius:18px;
+
+box-shadow:0 3px 8px rgba(0,0,0,.15);
+
+cursor:pointer;
+
+}
+
+.genderBox input{
+
+margin:0;
+
+width:18px;
+
+height:18px;
 
 }
 
